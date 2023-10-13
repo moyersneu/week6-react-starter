@@ -5,6 +5,7 @@ import { OperatorKeys } from '../enums/operator-keys.enum';
 import { ActionKeys } from '../enums/action-keys.enum';
 
 describe('CalculatorModel', (): void => {
+
   let calculator: ICalculatorModel;
 
   beforeEach((): void => {

@@ -44,10 +44,10 @@ class EnteringSecondOperand implements ICalculatorState {
   pressOperatorKey(key: OperatorKeys): void {
     if (this.calculator.input[1] === OperatorKeys.MULT) {
       const computeValue = Number(this.calculator.input[0]) * Number(this.calculator.input[2]);
-      this.calculator.input = new Array(String(computeValue), key);
+      this.calculator.input = [String(computeValue), key];
     } else if (this.calculator.input[1] === OperatorKeys.DIV) {
       const computeValue = Number(this.calculator.input[0]) / Number(this.calculator.input[2]);
-      this.calculator.input = new Array(String(computeValue), key);
+      this.calculator.input = [String(computeValue), key];
     } else if (
       this.calculator.input[1] === OperatorKeys.PLUS ||
       this.calculator.input[1] === OperatorKeys.MINUS
@@ -95,31 +95,31 @@ class EnteringThirdOperand implements ICalculatorState {
   pressOperatorKey(key: OperatorKeys): void {
     if (this.calculator.input[3] === OperatorKeys.MULT) {
       const computeValue = Number(this.calculator.input[2]) * Number(this.calculator.input[4]);
-      this.calculator.input = new Array(
+      this.calculator.input = [
         this.calculator.input[0],
         this.calculator.input[1],
         String(computeValue),
         key,
-      );
+      ];
     } else if (this.calculator.input[3] === OperatorKeys.DIV) {
       const computeValue = Number(this.calculator.input[2]) / Number(this.calculator.input[4]);
-      this.calculator.input = new Array(
+      this.calculator.input = [
         this.calculator.input[0],
         this.calculator.input[1],
         String(computeValue),
         key,
-      );
+      ];
     } else if (
       this.calculator.input[1] === OperatorKeys.PLUS ||
       this.calculator.input[1] === OperatorKeys.MINUS
     ) {
       const computeValue = Number(this.calculator.input[0]) / Number(this.calculator.input[2]);
-      this.calculator.input = new Array(
+      this.calculator.input = [
         String(computeValue),
         this.calculator.input[3],
         this.calculator.input[4],
         key,
-      );
+      ];
     }
   }
   pressActionKey(key: ActionKeys): void {
@@ -129,8 +129,8 @@ class EnteringThirdOperand implements ICalculatorState {
       const third = Number(this.calculator.input[4]);
       const firstOperator = this.calculator.input[1];
       const secondOperator = this.calculator.input[3];
-      let firstComputeValue;
-      let finalComputeValue;
+      let firstComputeValue = 0;
+      let finalComputeValue = 0;
 
       if (secondOperator === OperatorKeys.PLUS) {
         firstComputeValue = second + third;
@@ -169,7 +169,7 @@ export class CalculatorModel implements ICalculatorModel {
     this.secondState = new EnteringSecondOperand(this);
     this.thirdState = new EnteringThirdOperand(this);
     this.currentState = this.firstState;
-    this.input = new Array();
+    this.input = [];
   }
 
   public setState(state: ICalculatorState) {
